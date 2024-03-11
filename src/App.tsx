@@ -4,6 +4,7 @@ import { Header } from './site/Header';
 import { Footer } from './site/Footer';
 import { NewComponent } from './site/NewComponent';
 import { NewComponent1 } from './site/NewComponent1';
+import { Button } from './site/Button';
 function App() {
     const students = [
         { id: 1, name: 'James', age: 8 },
@@ -23,6 +24,31 @@ function App() {
         { manufacturer: 'Mercedes', model: 'e63s' },
         { manufacturer: 'Audi', model: 'rs6' },
     ];
+    // const myFirstSubmit = () => {
+    //     alert('Hello! Im Rus!');
+    // };
+    // const myFirstSubmit1 = () => {
+    //     alert('Hello! Im Ivan!');
+    // };
+
+    const onClickHandler = (name: string) => {
+        alert(name);
+    };
+    const foo1 = () => {
+        alert(34);
+    };
+    const foo2 = (number: number) => {
+        alert(number);
+    };
+
+    const Button1Foo = (name: string, age: number, addres: string) => {
+        alert(`${name} ${age} ${addres}`);
+    };
+
+    const Button1Foo1 = () => {
+        alert('Я тупая кнопка');
+    };
+
     return (
         <div className="App">
             {/* <Header title={'New Header'} />
@@ -30,6 +56,30 @@ function App() {
             <Footer title={'New Footer'} /> */}
             <NewComponent students={students} />
             <NewComponent1 Cars={topCars} />
+            {/* <button
+                onClick={(event) => {
+                    alert('Hello!');
+                }}
+            >
+                My button
+            </button> */}
+            <button onClick={() => onClickHandler('Rus')}>My button</button>
+            <button onClick={() => onClickHandler('Ivan')}>My button</button>
+            <button onClick={foo1}>1</button>
+            <button onClick={() => foo2(34)}>2</button>
+            <div>
+                <Button
+                    name={'My Button 1'}
+                    callBack={() => Button1Foo('Hello BelloRus', 34, 'Sib')}
+                />
+            </div>
+            <div>
+                <Button
+                    name={'My Button 2'}
+                    callBack={() => Button1Foo('Hello Rus', 24, 'Tomsk')}
+                />
+                <Button name={'Я тупая кнопка'} callBack={Button1Foo1} />
+            </div>
         </div>
     );
 }
