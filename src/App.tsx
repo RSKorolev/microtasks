@@ -6,7 +6,8 @@ import { NewComponent } from './site/NewComponent';
 import { NewComponent1 } from './site/NewComponent1';
 import { Button } from './site/Button';
 import { useState } from 'react';
-
+import { FullInput } from './site/FullInput';
+import { Input } from './site/Input';
 function App() {
     const students = [
         { id: 1, name: 'James', age: 8 },
@@ -89,6 +90,24 @@ function App() {
         setFilter(nameButton);
     };
 
+    const [message, setMessage] = useState([
+        { message: 'message1' },
+        { message: 'message2' },
+        { message: 'message3' },
+        { message: 'message4' },
+        { message: 'message5' },
+    ]);
+
+    const [title, setTitle] = useState('');
+    const callBackButterHundler = () => {
+        addToMessage(title);
+        setTitle('');
+    };
+
+    const addToMessage = (title: string) => {
+        let newMessage = { message: title };
+        setMessage([newMessage, ...message]);
+    };
     return (
         <div className="App">
             {/* <Header title={'New Header'} />
@@ -156,6 +175,19 @@ function App() {
                     name={'rubl'}
                     callBack={() => onClickHandlerFilter('ruble')}
                 />
+            </div>
+            <div className="FullInput">
+                <FullInput addToMessage={addToMessage} />
+                {message.map((el, index) => {
+                    return <div key={index}>{el.message}</div>;
+                })}
+            </div>
+            <div className="Input">
+                <Input setTitle={setTitle} title={title} />
+                <Button name={'+'} callBack={callBackButterHundler} />
+                {message.map((el, index) => {
+                    return <div key={index}>{el.message}</div>;
+                })}
             </div>
         </div>
     );
