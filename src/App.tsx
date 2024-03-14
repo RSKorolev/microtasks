@@ -5,6 +5,7 @@ import { Footer } from './site/Footer';
 import { NewComponent } from './site/NewComponent';
 import { NewComponent1 } from './site/NewComponent1';
 import { Button } from './site/Button';
+import { useState } from 'react';
 function App() {
     const students = [
         { id: 1, name: 'James', age: 8 },
@@ -48,7 +49,14 @@ function App() {
     const Button1Foo1 = () => {
         alert('Я тупая кнопка');
     };
-
+    let initialState = 1;
+    let [count, setCount] = useState(initialState);
+    const onClickHandlerCount = () => {
+        setCount(++count);
+    };
+    const onClickHandlerCountZero = () => {
+        setCount((count = 0));
+    };
     return (
         <div className="App">
             {/* <Header title={'New Header'} />
@@ -79,6 +87,11 @@ function App() {
                     callBack={() => Button1Foo('Hello Rus', 24, 'Tomsk')}
                 />
                 <Button name={'Я тупая кнопка'} callBack={Button1Foo1} />
+            </div>
+            <div>
+                <h3>{count}</h3>
+                <button onClick={onClickHandlerCount}>Счетчик</button>
+                <button onClick={onClickHandlerCountZero}>Zero</button>
             </div>
         </div>
     );
