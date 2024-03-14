@@ -6,6 +6,7 @@ import { NewComponent } from './site/NewComponent';
 import { NewComponent1 } from './site/NewComponent1';
 import { Button } from './site/Button';
 import { useState } from 'react';
+
 function App() {
     const students = [
         { id: 1, name: 'James', age: 8 },
@@ -57,6 +58,37 @@ function App() {
     const onClickHandlerCountZero = () => {
         setCount((count = 0));
     };
+
+    type FilterType = 'all' | 'dollar' | 'ruble';
+
+    const [money, setMoney] = useState([
+        { banknote: 'dollar', nominal: 100, number: ' a1234567890' },
+        { banknote: 'dollar', nominal: 50, number: ' z1234567890' },
+        { banknote: 'ruble', nominal: 100, number: ' w1234567890' },
+        { banknote: 'dollar', nominal: 100, number: ' e1234567890' },
+        { banknote: 'dollar', nominal: 50, number: ' c1234567890' },
+        { banknote: 'ruble', nominal: 100, number: ' r1234567890' },
+        { banknote: 'dollar', nominal: 50, number: ' x1234567890' },
+        { banknote: 'ruble', nominal: 50, number: ' v1234567890' },
+    ]);
+
+    const [filter, setFilter] = useState('all');
+    let currentMoney = money;
+    if (filter === 'dollar') {
+        currentMoney = money.filter(
+            (filteredMoney) => filteredMoney.banknote === 'dollar'
+        );
+    }
+    if (filter === 'ruble') {
+        currentMoney = money.filter(
+            (filteredMoney) => filteredMoney.banknote === 'ruble'
+        );
+    }
+
+    const onClickHandlerFilter = (nameButton: FilterType) => {
+        setFilter(nameButton);
+    };
+
     return (
         <div className="App">
             {/* <Header title={'New Header'} />
@@ -99,6 +131,31 @@ function App() {
                     callBack={onClickHandlerCount}
                 />
                 <Button name={'Zero'} callBack={onClickHandlerCountZero} />
+            </div>
+            <div className="filter">
+                <ul>
+                    {currentMoney.map((objFromMoneyArr, i) => {
+                        return (
+                            <li key={i}>
+                                <span>{objFromMoneyArr.banknote}</span>
+                                <span>{objFromMoneyArr.nominal}</span>
+                                <span>{objFromMoneyArr.number}</span>
+                            </li>
+                        );
+                    })}
+                </ul>
+                <Button
+                    name={'All'}
+                    callBack={() => onClickHandlerFilter('all')}
+                />
+                <Button
+                    name={'dollar'}
+                    callBack={() => onClickHandlerFilter('dollar')}
+                />
+                <Button
+                    name={'rubl'}
+                    callBack={() => onClickHandlerFilter('ruble')}
+                />
             </div>
         </div>
     );
