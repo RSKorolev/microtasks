@@ -93,6 +93,13 @@ function App() {
                 <button onClick={onClickHandlerCount}>Счетчик</button>
                 <button onClick={onClickHandlerCountZero}>Zero</button>
             </div>
+            <div>
+                <Button
+                    name={`Счетчик ${count}`}
+                    callBack={onClickHandlerCount}
+                />
+                <Button name={'Zero'} callBack={onClickHandlerCountZero} />
+            </div>
         </div>
     );
 }
